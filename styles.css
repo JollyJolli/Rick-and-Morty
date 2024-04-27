@@ -1,0 +1,93 @@
+body {
+    background-color: #121e22;
+    color: #ede1dd;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+header {
+    background-color: #1f343a;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.5s;
+}
+
+h1 {
+    margin: 0;
+}
+
+#searchInput {
+    width: 300px;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #121e22;
+    transition: width 0.5s, color 0.5s;
+}
+
+#themeButton {
+    background-color: transparent;
+    color: #ede1dd;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 10px;
+    transition: color 0.5s;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    transition: padding 0.5s;
+}
+
+.character-card {
+    background-color: #1f343a;
+    color: #ede1dd;
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.character-card img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.character-card h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.character-card p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+/* Estilos para hacer la página responsive */
+@media screen and (max-width: 600px) {
+    #searchInput {
+        width: 100%;
+    }
+
+    .character-card {
+        width: calc(100% - 40px);
+    }
+}
