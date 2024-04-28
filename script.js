@@ -3,19 +3,39 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("searchInput");
     const themeButton = document.getElementById("themeButton");
     const themeStylesheet = document.getElementById("themeStylesheet");
+    const loader = document.getElementById("loader"); // Obtener el elemento del loader
 
-    async function getAllCharacters() {
-        let allCharacters = [];
-        let currentPage = 1;
-        let totalPages = 42;
+    async function getRandomCharacters(count) {
+        loader.style.display = "block"; // Mostrar el loader al iniciar la carga
 
-        while (currentPage <= totalPages) {
-            const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${currentPage}`);
+        let randomCharacters = [];
+        const totalPages = 42;
+
+        for (let i = 0; i < count; i++) {
+            const randomPage = Math.floor(Math.random() * totalPages) + 1;
+            const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${randomPage}`);
             const data = await response.json();
-            allCharacters = allCharacters.concat(data.results);
-            currentPage++;
+            const randomCharacterIndex = Math.floor(Math.random() * data.results.length);
+            randomCharacters.push(data.results[randomCharacterIndex]);
         }
 
+        loader.style.display = "none"; // Apagar el loader cuando se han mostrado todos los personajes
+        return randomCharacters;
+    }
+
+    async function getAllCharacters(searchTerm = "") {
+        loader.style.display = "block"; // Mostrar el loader al iniciar la carga
+
+        let allCharacters = [];
+        const totalPages = 42;
+
+        for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+            const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${currentPage}&name=${searchTerm}`);
+            const data = await response.json();
+            allCharacters = allCharacters.concat(data.results);
+        }
+
+        loader.style.display = "none"; // Apagar el loader cuando se han mostrado todos los personajes
         return allCharacters;
     }
 
@@ -70,39 +90,67 @@ document.addEventListener("DOMContentLoaded", function () {
         return card;
     }
 
-    async function loadAllCharacters() {
+    async function loadRandomCharacters(count) {
+        loader.style.display = "block"; // Mostrar el loader al iniciar la carga
         characterContainer.innerHTML = "";
         try {
-            const allCharacters = await getAllCharacters();
+            const randomCharacters = await getRandomCharacters(count);
+            randomCharacters.forEach(character => {
+                const card = createCharacterCard(character);
+                characterContainer.appendChild(card);
+            });
+        } catch (error) {
+            console.error("Error al cargar los personajes aleatorios:", error);
+        } finally {
+            loader.style.display = "none"; // Apagar el loader cuando se han mostrado todos los personajes
+        }
+    }
+
+    async function loadAllCharacters(searchTerm = "") {
+        loader.style.display = "block"; // Mostrar el loader al iniciar la carga
+        characterContainer.innerHTML = "";
+        try {
+            const allCharacters = await getAllCharacters(searchTerm);
             allCharacters.forEach(character => {
                 const card = createCharacterCard(character);
                 characterContainer.appendChild(card);
             });
         } catch (error) {
             console.error("Error al cargar los personajes:", error);
+        } finally {
+            loader.style.display = "none"; // Apagar el loader cuando se han mostrado todos los personajes
         }
     }
 
-    function searchCharacters(searchTerm) {
-        characterContainer.innerHTML = "";
-        fetch(`https://rickandmortyapi.com/api/character/?name=${searchTerm}`)
-            .then(response => response.json())
-            .then(data => {
-                data.results.forEach(character => {
-                    const card = createCharacterCard(character);
-                    characterContainer.appendChild(card);
-                });
+    async function searchCharacters(searchTerm) {
+        loader.style.display = "none"; // Mostrar el loader al iniciar la búsqueda
+        characterContainer.innerHTML = ""; // Limpiar la lista de personajes actuales
+
+        try {
+            const allCharacters = await getAllCharacters(); // Obtener todos los personajes
+            const filteredCharacters = allCharacters.filter(character =>
+                character.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            filteredCharacters.forEach(character => {
+                const card = createCharacterCard(character);
+                characterContainer.appendChild(card);
             });
+        } catch (error) {
+            console.error("Error al buscar los personajes:", error);
+        } finally {
+            loader.style.display = "none"; // Apagar el loader cuando se han mostrado todos los personajes
+        }
     }
 
-    loadAllCharacters();
+    loadRandomCharacters(15);
 
     searchInput.addEventListener("input", function () {
         const searchTerm = searchInput.value.trim();
         if (searchTerm !== "") {
             searchCharacters(searchTerm);
         } else {
-            loadAllCharacters();
+            loadRandomCharacters(15);
         }
     });
 
@@ -112,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
             themeButton.innerHTML = '<i class="fas fa-moon"></i> Cambiar a Modo Oscuro';
         } else {
             themeStylesheet.href = "styles.css";
-            themeButton.innerHTML = '<i class="fas fa-adjust"></i> Cambiar Tema';
+            themeButton.innerHTML = '<i class="fas fa-adjust"></i> Cambiar a Modo Claro';
         }
     });
 });
