@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rick and Morty Characters</title>
-    <link rel="stylesheet" href="styles.css" id="themeStylesheet">
+    <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/bc3d0bf176.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <h1>Rick and Morty Characters</h1>
         <input type="text" id="searchInput" placeholder="Buscar personaje...">
-        <button id="themeButton"><i class="fas fa-adjust"></i> Cambiar Tema</button>
+        <button id="favoritesButton">Mostrar Favoritos</button>
     </header>
     <main id="characterContainer"></main>
-    <div id="loader"></div>
+    <div id="loader"><i class="fas fa-spinner fa-spin"></i></div>
     <script src="script.js"></script>
+    
 </body>
 </html>

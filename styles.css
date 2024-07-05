@@ -1,113 +1,129 @@
-body {
-    background-color: #121e22;
-    color: #ede1dd;
-    font-family: Arial, sans-serif;
+/* Reset CSS */
+* {
     margin: 0;
     padding: 0;
-    transition: background-color 0.5s, color 0.5s;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif; /* Cambiar a Arial */
+    background-color: #1a1a2e; /* Fondo oscuro */
+    color: #e0e0e0; /* Texto principal */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 header {
-    background-color: #1f343a;
-    padding: 20px;
     text-align: center;
-    transition: background-color 0.5s;
+    margin-bottom: 20px;
 }
 
-h1 {
-    margin: 0;
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #66ff99; /* Título en verde */
 }
 
 #searchInput {
-    width: 300px;
     padding: 10px;
-    margin-top: 20px;
+    font-size: 1em;
+    width: 300px;
+    max-width: 100%;
+    border: 1px solid #e0e0e0; /* Borde del input */
+    border-radius: 5px;
+    background-color: #0f3460; /* Fondo del input */
+    color: #e0e0e0; /* Texto del input */
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 1em;
+    background-color: #66ff99;
+    color: #1a1a2e;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
-    background-color: #ffffff;
-    color: #121e22;
-    transition: width 0.5s, color 0.5s;
-}
-
-#themeButton {
-    background-color: transparent;
-    color: #ede1dd;
-    border: none;
-    font-size: 16px;
     cursor: pointer;
-    padding: 10px;
-    margin-left: 10px;
-    transition: color 0.5s;
 }
 
-main {
+button:hover {
+    background-color: #88ffab;
+}
+
+#characterContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 20px;
     padding: 20px;
-    transition: padding 0.5s;
+    max-width: 1200px;
+    width: 100%;
 }
 
 .character-card {
-    background-color: #1f343a;
-    color: #ede1dd;
-    width: 300px;
-    margin: 20px;
-    padding: 20px;
+    background: #16213e; /* Fondo de las tarjetas */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 250px;
+    transition: transform 0.2s;
+    position: relative;
 }
 
 .character-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .character-card img {
     width: 100%;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    height: auto;
 }
 
-.character-card h2 {
+.character-card h2, .character-card p {
+    padding: 10px;
     margin: 0;
-    font-size: 20px;
+    color: #66ff99; /* Texto de las tarjetas */
 }
 
-.character-card p {
-    margin: 5px 0;
-    font-size: 16px;
+.favorite-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ff6666;
+    font-size: 1.5em;
 }
 
-/* Estilos para hacer la página responsive */
-@media screen and (max-width: 600px) {
-    #searchInput {
-        width: 100%;
-    }
-
-    .character-card {
-        width: calc(100% - 40px);
-    }
+.favorite-button.favorited {
+    color: #ff3333;
 }
 
 #loader {
+    display: none; /* Ocultar el loader por defecto */
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-    z-index: 9999;
-    display: none; /* Ocultar el loader por defecto */
+    font-size: 3em;
+    color: #66ff99; /* Color del loader */
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+#loader i {
+    animation: spin 2s linear infinite;
+}
+
+/* Estilo para la selección de texto */
+::selection {
+    background-color: #66ff99; /* Fondo de la selección */
+    color: #1a1a2e; /* Color del texto seleccionado */
 }
