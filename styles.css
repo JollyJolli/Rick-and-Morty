@@ -127,3 +127,60 @@ button:hover {
     background-color: #66ff99; /* Fondo de la selección */
     color: #1a1a2e; /* Color del texto seleccionado */
 }
+
+/* Extra small devices (phones, 576px and down) */
+@media (max-width: 576px) {
+  .character-card {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .character-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  .favorite-button {
+    width: 100%;
+  }
+
+  .fa-heart {
+    margin-right: 5px;
+  }
+}
+
+/* Small devices (landscape phones, 577px - 768px) */
+@media (min-width: 577px) and (max-width: 768px) {
+  .character-card {
+    width: 48%;
+    margin-right: 2%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Medium devices (tablets, 769px - 992px) */
+@media (min-width: 769px) and (max-width: 992px) {
+  .character-card {
+    width: 31.33%;
+    margin-right: 2%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Large devices (desktops, 993px - 1200px) */
+@media (min-width: 993px) and (max-width: 1200px) {
+  .character-card {
+    width: 23.5%;
+    margin-right: 1.5%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Extra large devices (large desktops, 1201px and up) */
+@media (min-width: 1201px) {
+  .character-card {
+    width: 18.5%;
+    margin-right: 1%;
+    margin-bottom: 20px;
+  }
+}
