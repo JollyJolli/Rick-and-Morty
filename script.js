@@ -228,13 +228,13 @@ document.addEventListener("DOMContentLoaded", function () {
             favoritesButton.textContent = "Mostrar Todos";
         } else {
             characterContainer.innerHTML = "";
-            loadRandomCharacters(23);
+            loadRandomCharacters(20);
             favoritesButton.textContent = "Mostrar Favoritos";
         }
         isShowingFavorites = !isShowingFavorites;
     });
 
-    loadRandomCharacters(23);
+    loadRandomCharacters(20);
 
     searchInput.addEventListener("input", function () {
         const searchTerm = searchInput.value.trim();
